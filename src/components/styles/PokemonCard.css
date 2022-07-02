@@ -1,0 +1,24 @@
+.CardMedia {
+  margin: auto;
+  height: 130px;
+  width: 130px;
+}
+
+.Card {
+  cursor: pointer;
+  border: 3px outset #a41c1c;
+  border-radius: 10px !important;
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* add some hover later on
+.Card:hover {
+
+} */
+
+.CardContent {
+  font-family: "Poppins", sans-serif !important;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+}
