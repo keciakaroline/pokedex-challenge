@@ -3,13 +3,9 @@ import { Box, CircularProgress, Grid } from "@mui/material";
 import PokemonCard from "./PokemonCard";
 import Pagination from "./Pagination";
 
-import "./styles/Pokedex.css";
-
 export default function Pokedex({
   pokemons,
-  setPokemons,
   loading,
-  setLoading,
   page,
   setPage,
   totalPages,
@@ -29,7 +25,13 @@ export default function Pokedex({
   };
 
   return (
-    <Box className="Box">
+    <Box
+      style={{
+        marginTop: "100px",
+        width: "100%",
+        height: "100%",
+      }}
+    >
       <div>
         <Pagination
           page={page + 1}
@@ -42,7 +44,12 @@ export default function Pokedex({
       {loading ? (
         <CircularProgress style={{ marginTop: 100 }} />
       ) : (
-        <Grid container spacing={2} className="Pokedex-container">
+        <Grid
+          container
+          spacing={2}
+          style={{ textAlign: "center", padding: "50px 10px 0px 10px" }}
+          className="Pokedex-container"
+        >
           {pokemons &&
             pokemons.map((pokemon, index) => {
               return <PokemonCard pokemon={pokemon} key={index} />;
