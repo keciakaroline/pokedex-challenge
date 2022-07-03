@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Container, Box, IconButton } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { Typography, Container, IconButton } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
+import FavoriteContext from "../contexts/favoritesContext";
 
 import "./styles/PokemonDetails.css";
 
 export default function PokemonDetails() {
   const { name } = useParams();
   const [pokemonDetail, setPokemonDetail] = useState(null);
+  const { favoritePokemons, updateFavoritePokemons } =
+    useContext(FavoriteContext);
 
   const getPokemonDetail = async (name) => {
     try {
@@ -25,6 +28,12 @@ export default function PokemonDetails() {
     getPokemonDetail(name);
   }, []);
 
+  // add pokemon to favorite list
+  const addPokemonToFavorite = () => {
+    // console.log("favorited");
+    updateFavoritePokemons(pokemonDetail.name);
+  };
+
   if (!pokemonDetail) return null;
 
   return (
@@ -36,7 +45,7 @@ export default function PokemonDetails() {
         alignItems: "center",
       }}
     >
-      <div>
+      <div className="pokemon-name-favorite">
         <Typography
           component="div"
           variant="h6"
@@ -48,17 +57,21 @@ export default function PokemonDetails() {
         >
           {pokemonDetail.name}
         </Typography>
-
-        {/* <IconButton
-          onClick={() =>
-            isFavorite ? removePokemonFromFavorites() : addPokemonToFavorite()
-          }
+        <IconButton
+          onClick={addPokemonToFavorite}
           size="large"
           color="inherit"
           aria-label="add to favorites"
+          style={{ marginLeft: "10px" }}
         >
-          <Favorite color={isFavorite ? `error` : `disabled`} />
-        </IconButton> */}
+          <Favorite
+            color={
+              favoritePokemons.includes(pokemonDetail.name)
+                ? `error`
+                : `disabled`
+            }
+          />
+        </IconButton>
       </div>
 
       <img
