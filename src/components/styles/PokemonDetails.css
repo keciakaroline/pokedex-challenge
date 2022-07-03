@@ -1,0 +1,25 @@
+.pokemon-details {
+  text-transform: capitalize;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-details-info {
+  padding-right: 10px;
+}
+
+.pokemon-details-stats {
+  display: flex;
+
+  text-transform: capitalize;
+  font-size: 20px;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.stats {
+  padding: 5px 20px;
+}
