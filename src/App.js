@@ -6,12 +6,16 @@ import Navbar from "./components/Navbar";
 import Favorites from "./components/Favorites";
 import { getPokemons, getPokemonsData } from "./api";
 import PokemonDetails from "./components/PokemonDetails";
+import { FavoriteProvider } from "./contexts/favoritesContext";
+
+const favoritesKey = "FAVORITES_KEY";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [favorites, setFavorites] = useState([]);
 
   const itemsPerPage = 50;
   const fetchPokemons = async () => {
@@ -34,42 +38,74 @@ function App() {
     }
   };
 
+  // to get information from favorite pokemon
+  const loadFavoritePokemons = () => {
+    const pokemons =
+      JSON.parse(window.localStorage.getItem(favoritesKey)) || [];
+    setFavorites(pokemons);
+  };
+
+  useEffect(() => {
+    loadFavoritePokemons();
+  }, []);
+
   // update when change/load page
   useEffect(() => {
     //console.log("loaded");
     fetchPokemons();
   }, [page]);
 
+  const updateFavoritePokemons = (name) => {
+    const updatedFavorites = [...favorites];
+    const favoriteIndex = favorites.indexOf(name);
+    // if pokemon already exists in favorite
+    if (favoriteIndex >= 0) {
+      updatedFavorites.splice(favoriteIndex, 1);
+    } else {
+      // if pokemon do not exists in favorite, add him
+      updatedFavorites.push(name);
+    }
+    window.localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+  };
+
   return (
     <div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Pokedex
-                pokemons={pokemons}
-                setPokemons={setPokemons}
-                loading={loading}
-                setLoading={setLoading}
-                page={page}
-                setPage={setPage}
-                totalPages={totalPages}
-              />
-            }
-          />
-          <Route exact path="/favorite" element={<Favorites />} />
-          <Route
-            exact
-            path={`/pokemon/:name`}
-            element={
-              <PokemonDetails pokemons={pokemons} setPokemons={setPokemons} />
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <FavoriteProvider
+        value={{
+          favoritePokemons: favorites,
+          updateFavoritePokemons: updateFavoritePokemons,
+        }}
+      >
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <Pokedex
+                  pokemons={pokemons}
+                  setPokemons={setPokemons}
+                  loading={loading}
+                  setLoading={setLoading}
+                  page={page}
+                  setPage={setPage}
+                  totalPages={totalPages}
+                />
+              }
+            />
+            <Route exact path="/favorites" element={<Favorites />} />
+            <Route
+              exact
+              path={`/pokemon/:name`}
+              element={
+                <PokemonDetails pokemons={pokemons} setPokemons={setPokemons} />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </FavoriteProvider>
     </div>
   );
 }
