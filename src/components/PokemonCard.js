@@ -9,10 +9,10 @@ export default function PokemonCard({ pokemon, index }) {
     <Grid item xs={12} sm={6} md={4} lg={2} key={index}>
       <Card className="Card">
         <CardContent className="CardContent">
-          <Typography component="div" variant="h6" className="Typography">
+          <Typography component="div" variant="h6">
             #{pokemon.id}
           </Typography>
-          <Typography component="div" variant="h6" className="Typography">
+          <Typography component="div" variant="h6">
             {pokemon.name}
           </Typography>
         </CardContent>
@@ -23,7 +23,11 @@ export default function PokemonCard({ pokemon, index }) {
         >
           <CardMedia
             image={pokemon.sprites.front_default}
-            className="CardMedia"
+            style={{
+              margin: "auto",
+              height: "130px",
+              width: "130px",
+            }}
             alt={pokemon.name}
           ></CardMedia>
         </Link>
