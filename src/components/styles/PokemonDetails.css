@@ -23,3 +23,10 @@
 .stats {
   padding: 5px 20px;
 }
+
+.pokemon-name-favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 15px;
+}
