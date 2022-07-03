@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import PokemonDetails from "./PokemonDetails";
+import { Link } from "react-router-dom";
 
 import "./styles/PokemonCard.css";
 
@@ -16,11 +15,6 @@ export default function PokemonCard({ pokemon, index }) {
           <Typography component="div" variant="h6" className="Typography">
             {pokemon.name}
           </Typography>
-          {/* <Typography component="div" variant="h6" className="Typography">
-            {pokemon.types.map((type, index) => {
-              return <div key={index}>{type.type.name}</div>;
-            })}
-          </Typography> */}
         </CardContent>
         <Link
           to={`/pokemon/${pokemon.name}`}

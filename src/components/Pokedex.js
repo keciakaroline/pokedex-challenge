@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, CircularProgress, Grid } from "@mui/material";
 import PokemonCard from "./PokemonCard";
 import Pagination from "./Pagination";

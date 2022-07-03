@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Container } from "@mui/material";
+import { Typography, Container, Box, IconButton } from "@mui/material";
+import { Favorite } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
+
 import "./styles/PokemonDetails.css";
 
 export default function PokemonDetails() {
@@ -34,17 +36,31 @@ export default function PokemonDetails() {
         alignItems: "center",
       }}
     >
-      <Typography
-        component="div"
-        variant="h6"
-        style={{
-          fontSize: "36px",
-          textTransform: "capitalize",
-          textDecoration: "underline",
-        }}
-      >
-        {pokemonDetail.name}
-      </Typography>
+      <div>
+        <Typography
+          component="div"
+          variant="h6"
+          style={{
+            fontSize: "36px",
+            textTransform: "capitalize",
+            textDecoration: "underline",
+          }}
+        >
+          {pokemonDetail.name}
+        </Typography>
+
+        {/* <IconButton
+          onClick={() =>
+            isFavorite ? removePokemonFromFavorites() : addPokemonToFavorite()
+          }
+          size="large"
+          color="inherit"
+          aria-label="add to favorites"
+        >
+          <Favorite color={isFavorite ? `error` : `disabled`} />
+        </IconButton> */}
+      </div>
+
       <img
         width="350px"
         height="auto"
