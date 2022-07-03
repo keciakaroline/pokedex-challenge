@@ -12,6 +12,8 @@ export default function PokemonDetails() {
   const { favoritePokemons, updateFavoritePokemons } =
     useContext(FavoriteContext);
 
+  const favoritePokemonsNames = favoritePokemons.map((pokemon) => pokemon.name);
+
   const getPokemonDetail = async (name) => {
     try {
       let url = `https://pokeapi.co/api/v2/pokemon/${name}`;
@@ -31,7 +33,7 @@ export default function PokemonDetails() {
   // add pokemon to favorite list
   const addPokemonToFavorite = () => {
     // console.log("favorited");
-    updateFavoritePokemons(pokemonDetail.name);
+    updateFavoritePokemons(pokemonDetail);
   };
 
   if (!pokemonDetail) return null;
@@ -66,7 +68,7 @@ export default function PokemonDetails() {
         >
           <Favorite
             color={
-              favoritePokemons.includes(pokemonDetail.name)
+              favoritePokemonsNames.includes(pokemonDetail.name)
                 ? `error`
                 : `disabled`
             }

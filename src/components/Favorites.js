@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 import FavoriteContext from "../contexts/favoritesContext";
 import PokemonCard from "./PokemonCard";
 
-export default function Favorites() {
+export default function Favorites({ pokemons, setPokemons, setLoading }) {
   const { favoritePokemons } = useContext(FavoriteContext);
+  //console.log(favoritePokemons);
 
   return (
     <div
@@ -21,11 +22,10 @@ export default function Favorites() {
         <Container>
           <div>
             <Grid container spacing={2}>
-              Favorites
               {favoritePokemons &&
-                favoritePokemons.map((pokemon, index) => (
-                  <PokemonCard pokemon={pokemon} key={index} />
-                ))}
+                favoritePokemons.map((pokemon, index) => {
+                  return <PokemonCard pokemon={pokemon} key={index} />;
+                })}
             </Grid>
           </div>
         </Container>
