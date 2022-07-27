@@ -16,20 +16,24 @@ export default function Favorites({ pokemons, setPokemons, setLoading }) {
         marginLeft: "10px",
       }}
     >
-      {favoritePokemons >= 0 ? (
-        <h1>You don't have any favorites...</h1>
-      ) : (
-        <Container>
-          <div>
-            <Grid container spacing={2}>
-              {favoritePokemons &&
-                favoritePokemons.map((pokemon, index) => {
-                  return <PokemonCard pokemon={pokemon} key={index} />;
-                })}
-            </Grid>
-          </div>
-        </Container>
-      )}
+      {
+        // @ts-ignore
+        favoritePokemons >= 0 ? (
+          <h1>You don't have any favorites...</h1>
+        ) : (
+          <Container>
+            <div>
+              <Grid container spacing={2}>
+                {favoritePokemons &&
+                  favoritePokemons.map((pokemon, index) => {
+                    // @ts-ignore
+                    return <PokemonCard pokemon={pokemon} key={index} />;
+                  })}
+              </Grid>
+            </div>
+          </Container>
+        )
+      }
     </div>
   );
 }
