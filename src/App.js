@@ -6,7 +6,7 @@ import Favorites from "./components/Favorites";
 import { getPokemons, getPokemonsData } from "./api";
 import PokemonDetails from "./components/PokemonDetails";
 import { FavoriteProvider } from "./contexts/favoritesContext";
-import { Container } from "./components/styles/Container.styled";
+import GlobalStyles from "./components/styles/Global.styled";
 
 const favoritesKey = "FAVORITES_KEY";
 
@@ -78,7 +78,8 @@ function App() {
   };
 
   return (
-    <Container>
+    <>
+      <GlobalStyles />
       <FavoriteProvider
         value={{
           favoritePokemons: favorites,
@@ -125,7 +126,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </FavoriteProvider>
-    </Container>
+    </>
   );
 }
 
