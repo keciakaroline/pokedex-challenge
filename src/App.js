@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Pokedex from "./components/Pokedex";
@@ -7,6 +6,7 @@ import Favorites from "./components/Favorites";
 import { getPokemons, getPokemonsData } from "./api";
 import PokemonDetails from "./components/PokemonDetails";
 import { FavoriteProvider } from "./contexts/favoritesContext";
+import { Container } from "./components/styles/Container.styled";
 
 const favoritesKey = "FAVORITES_KEY";
 
@@ -30,6 +30,7 @@ function App() {
       // receive results
       const results = await Promise.all(promises);
 
+      // @ts-ignore
       setPokemons(results);
       setLoading(false);
       // to know how many pages the pagination will have
@@ -42,6 +43,7 @@ function App() {
   // to get information from favorite pokemon
   const loadFavoritePokemons = () => {
     const pokemons =
+      // @ts-ignore
       JSON.parse(window.localStorage.getItem(favoritesKey)) || [];
     setFavorites(pokemons);
   };
@@ -71,11 +73,12 @@ function App() {
       updatedFavorites.push(pokemonObject);
     }
     window.localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites));
+    // @ts-ignore
     setFavorites(updatedFavorites);
   };
 
   return (
-    <div>
+    <Container>
       <FavoriteProvider
         value={{
           favoritePokemons: favorites,
@@ -122,7 +125,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </FavoriteProvider>
-    </div>
+    </Container>
   );
 }
 
