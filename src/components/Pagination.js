@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  PaginationSection,
+  LeftButton,
+  RightButton,
+} from "./styles/Pagination.styled";
 
 export default function Pagination({
   page,
@@ -7,34 +12,12 @@ export default function Pagination({
   onLeftClick,
 }) {
   return (
-    <div
-      style={{ display: "flex", padding: "20px", justifyContent: "flex-end" }}
-    >
-      <button
-        style={{
-          marginRight: "10px",
-          background: "transparent",
-          borderRadius: "60px",
-          cursor: "pointer",
-        }}
-        onClick={onLeftClick}
-      >
-        ⬅
-      </button>
+    <PaginationSection>
+      <LeftButton onClick={onLeftClick}>⬅</LeftButton>
       <div>
         {page} of {totalPages}
       </div>
-      <button
-        style={{
-          marginLeft: "10px",
-          background: "transparent",
-          borderRadius: "60px",
-          cursor: "pointer",
-        }}
-        onClick={onRightClick}
-      >
-        ➡
-      </button>
-    </div>
+      <RightButton onClick={onRightClick}>➡</RightButton>
+    </PaginationSection>
   );
 }
