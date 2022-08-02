@@ -1,7 +1,6 @@
 import React from "react";
-
 import {
-  Name,
+  SubTitle,
   CardImage,
   CardInfo,
   Card,
@@ -15,8 +14,8 @@ export default function PokemonCard({ pokemon }) {
       <CardLink to={`/pokemon/${pokemon.name}`}>
         <Card>
           <CardInfo>
-            <Name>#{pokemon.id}</Name>
-            <Name>{pokemon.name}</Name>
+            <SubTitle>#{pokemon.id}</SubTitle>
+            <SubTitle>{pokemon.name}</SubTitle>
           </CardInfo>
 
           <CardImage

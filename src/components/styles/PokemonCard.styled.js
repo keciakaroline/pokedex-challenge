@@ -38,7 +38,7 @@ export const CardInfo = styled.div`
   font-weight: 700;
 `;
 
-export const Name = styled.div`
+export const SubTitle = styled.div`
   font-size: 18px;
   padding-right: 5px;
   margin-top: 10px;
