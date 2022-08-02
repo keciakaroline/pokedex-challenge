@@ -1,35 +1,24 @@
-import React, { useContext, useEffect } from "react";
-import { Container, Grid } from "@mui/material";
+import React, { useContext } from "react";
 import FavoriteContext from "../contexts/favoritesContext";
 import PokemonCard from "./PokemonCard";
+import { Main } from "./styles/Pokedex.styled";
 
-export default function Favorites({ pokemons, setPokemons, setLoading }) {
+export default function Favorites() {
   const { favoritePokemons } = useContext(FavoriteContext);
   //console.log(favoritePokemons);
 
   return (
-    <div
-      style={{
-        marginTop: "100px",
-        width: "100%",
-        height: "100%",
-        marginLeft: "10px",
-      }}
-    >
+    <>
       {favoritePokemons >= 0 ? (
         <h1>You don't have any favorites...</h1>
       ) : (
-        <Container>
-          <div>
-            <Grid container spacing={2}>
-              {favoritePokemons &&
-                favoritePokemons.map((pokemon, index) => {
-                  return <PokemonCard pokemon={pokemon} key={index} />;
-                })}
-            </Grid>
-          </div>
-        </Container>
+        <Main>
+          {favoritePokemons &&
+            favoritePokemons.map((pokemon, index) => {
+              return <PokemonCard pokemon={pokemon} key={index} />;
+            })}
+        </Main>
       )}
-    </div>
+    </>
   );
 }

@@ -1,35 +1,29 @@
 import React from "react";
-import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import {
+  SubTitle,
+  CardImage,
+  CardInfo,
+  Card,
+  CardLink,
+} from "./styles/PokemonCard.styled";
 
-import "./styles/PokemonCard.css";
-
-export default function PokemonCard({ pokemon, index }) {
-  console.log(pokemon);
+export default function PokemonCard({ pokemon }) {
+  // console.log(pokemon);
   return (
-    <Grid item xs={12} sm={6} md={4} lg={2} key={index}>
-      <Link to={`/pokemon/${pokemon.name}`} className="Link">
-        <Card className="Card">
-          <CardContent className="CardContent">
-            <Typography component="div" variant="h6">
-              #{pokemon.id}
-            </Typography>
-            <Typography component="div" variant="h6">
-              {pokemon.name}
-            </Typography>
-          </CardContent>
+    <>
+      <CardLink to={`/pokemon/${pokemon.name}`}>
+        <Card>
+          <CardInfo>
+            <SubTitle>#{pokemon.id}</SubTitle>
+            <SubTitle>{pokemon.name}</SubTitle>
+          </CardInfo>
 
-          <CardMedia
-            image={pokemon.sprites.front_default}
-            style={{
-              margin: "auto",
-              height: "130px",
-              width: "130px",
-            }}
+          <CardImage
+            src={pokemon.sprites.front_default}
             alt={pokemon.name}
-          ></CardMedia>
+          ></CardImage>
         </Card>
-      </Link>
-    </Grid>
+      </CardLink>
+    </>
   );
 }

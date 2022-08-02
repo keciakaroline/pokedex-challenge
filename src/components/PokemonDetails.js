@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Typography, Container, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import FavoriteContext from "../contexts/favoritesContext";
-
-import "./styles/PokemonDetails.css";
+import {
+  Name,
+  Title,
+  SubTitle,
+  Main,
+  Details,
+  Section,
+  Hr,
+} from "./styles/PokemonDetails.styled";
 
 export default function PokemonDetails() {
   const { name } = useParams();
@@ -39,32 +46,14 @@ export default function PokemonDetails() {
   if (!pokemonDetail) return null;
 
   return (
-    <Container
-      style={{
-        marginTop: 100,
-        textAlign: "center",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div className="pokemon-name-favorite">
-        <Typography
-          component="div"
-          variant="h6"
-          style={{
-            fontSize: "36px",
-            textTransform: "capitalize",
-            textDecoration: "underline",
-          }}
-        >
-          {pokemonDetail.name}
-        </Typography>
+    <Main>
+      <Name>
+        {pokemonDetail.name}
         <IconButton
           onClick={addPokemonToFavorite}
           size="large"
           color="inherit"
           aria-label="add to favorites"
-          style={{ marginLeft: "10px" }}
         >
           <Favorite
             color={
@@ -74,76 +63,67 @@ export default function PokemonDetails() {
             }
           />
         </IconButton>
-      </div>
-
+      </Name>
       <img
         width="350px"
         height="auto"
         src={pokemonDetail.sprites.front_default}
         alt={pokemonDetail.name}
       />
-      <div className="pokemon-details">
-        <Typography variant="h6" className="pokemon-details-info">
-          Type:
-        </Typography>
-        <Typography variant="h6" className="pokemon-details">
-          {pokemonDetail.types.map((type, index) => {
-            return <div key={index}>{type.type.name}</div>;
-          })}
-        </Typography>
-      </div>
+      <Details>
+        <Section>
+          <Title>Type:</Title>
+          <SubTitle>
+            {pokemonDetail.types.map((type, index) => {
+              return <div key={index}>{type.type.name},</div>;
+            })}
+          </SubTitle>
+        </Section>
 
-      <div className="pokemon-details">
-        <Typography variant="h6" className="pokemon-details-info">
-          Height:
-        </Typography>
-        <Typography component="div" variant="h6" className="pokemon-details">
-          <div>{pokemonDetail.height}</div>
-        </Typography>
-      </div>
+        <Section>
+          <Title>Height:</Title>
+          <SubTitle>
+            <div>{pokemonDetail.height}</div>
+          </SubTitle>
+        </Section>
 
-      <div className="pokemon-details">
-        <Typography variant="h6" className="pokemon-details-info">
-          Weight:
-        </Typography>
-        <Typography component="div" variant="h6" className="pokemon-details">
-          <div>{pokemonDetail.weight}</div>
-        </Typography>
-      </div>
+        <Section>
+          <Title>Weight:</Title>
+          <SubTitle>
+            <div>{pokemonDetail.weight}</div>
+          </SubTitle>
+        </Section>
 
-      <div className="pokemon-details">
-        <Typography variant="h6" className="pokemon-details-info">
-          Base Exp:
-        </Typography>
-        <Typography component="div" variant="h6" className="pokemon-details">
-          <div>{pokemonDetail.base_experience}</div>
-        </Typography>
-      </div>
+        <Section>
+          <Title>Base Exp:</Title>
+          <SubTitle>
+            <div>{pokemonDetail.base_experience}</div>
+          </SubTitle>
+        </Section>
 
-      <div className="pokemon-details">
-        <Typography variant="h6" className="pokemon-details-info">
-          Abilities:
-        </Typography>
-        <Typography component="div" variant="h6" className="pokemon-details">
-          <div>
-            {pokemonDetail.abilities
-              .map((ability) => ability.ability.name)
-              .join(", ")}
-          </div>
-        </Typography>
-      </div>
-
-      <div className="pokemon-details-stats">
+        <Section>
+          <Title>Abilities:</Title>
+          <SubTitle>
+            <div>
+              {pokemonDetail.abilities
+                .map((ability) => ability.ability.name)
+                .join(", ")}
+            </div>
+          </SubTitle>
+        </Section>
+      </Details>
+      <Hr></Hr>
+      <Details>
         {pokemonDetail.stats &&
           pokemonDetail.stats.map((stat, idx) => {
             return (
-              <div key={idx}>
-                <div className="stats">{stat.stat.name}</div>
-                <div className="stats">{stat.base_stat}</div>
-              </div>
+              <Section key={idx}>
+                <Title>{stat.stat.name}</Title>
+                <SubTitle>{stat.base_stat}</SubTitle>
+              </Section>
             );
           })}
-      </div>
-    </Container>
+      </Details>
+    </Main>
   );
 }

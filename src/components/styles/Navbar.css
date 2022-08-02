@@ -1,9 +1,0 @@
-.Link {
-  text-decoration: none;
-  color: white;
-}
-
-.Link:hover {
-  color: black;
-  cursor: pointer;
-}
