@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Here you can check out: https://main--pokedex-challenge-keciakaroline.netlify.app/
+Here you can check out: https://pokedex-keciakaroline.netlify.app
 
 ## Available Scripts
 
